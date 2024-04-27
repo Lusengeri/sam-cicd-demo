@@ -3,7 +3,7 @@ on:
     branches:
       - master
 
-permisssions:
+permissions:
   id-token: write
   contents: read
 
