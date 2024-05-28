@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: 'Branch, tag or commit SHA1 to build'
-        required: true
+        description: 'Branch, tag or commit SHA1 to build (if not specified tip of branch will be used)'
+        required: false
         type: string
 
 permissions:
@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref != '' && inputs.ref || github.ref }}
       - uses: actions/setup-python@v3
       - uses: aws-actions/setup-sam@v2
       - uses: aws-actions/configure-aws-credentials@v4
